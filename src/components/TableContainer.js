@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
-
 import API from '../utils/API';
-
+import Search from './Search';
+import EmployeeTable from './EmployeeTable';
 
 class TableContainer extends Component {
 
@@ -20,7 +19,6 @@ class TableContainer extends Component {
             name: '',
             phone: '',
             email: '',
-            age: '',
         }
     };
 
@@ -105,8 +103,6 @@ class TableContainer extends Component {
                         employee.phone.includes(input)
                         ||
                         employee.email.includes(input)
-                        ||
-                        employee.age.includes(input)
                     )
                 })
             })
@@ -122,12 +118,20 @@ class TableContainer extends Component {
 
     render() {
         return (
-            <div>placeholder</div>
+            <>
+                <Search
+                    value = {this.state.search}
+                    handleInputChange = {this.handleInputChange}
+                    handleFormSubmit = {this.handleFormSubmit}
+                />
+                <EmployeeTable
+                    state = {this.state}
+                    sortBy = {this.sortByFunction}
+                    filteredEmployees = {this.filteredEmployees}
+                />
+            </>
         )
     }
-
-
-
 }
 
 
